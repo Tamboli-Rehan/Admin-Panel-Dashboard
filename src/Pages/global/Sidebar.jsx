@@ -3,9 +3,9 @@ import { useState } from "react";
 import { useProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 // import "react-pro-sidebar/dist/css/styles.css";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { tokens } from "../../theme";
-import InputBase from "@mui/material/InputBase";
+// import InputBase from "@mui/material/InputBase";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
@@ -22,6 +22,13 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const linkStyles = {
+    textDecoration:"none",
+    color:"inherit",
+  }
+  // const textStyles = {
+  //   color: '#70d8bd', 
+  // };
   return (
     <MenuItem
       active={selected === title}
@@ -31,8 +38,9 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       onClick={() => setSelected(title)}
       icon={icon}
     >
-      <Typography>{title}</Typography>
-      <Link to={to} />
+      <RouterLink to={to} style={{...linkStyles, /* ...textStyles*/}}>
+        <Typography>{title}</Typography>
+      </RouterLink>
     </MenuItem>
   );
 };
@@ -118,14 +126,18 @@ const Sidebar = () => {
                   <img
                     src="../../assets/TechPaathshala_Logo.png"
                     alt="Techpaathshala Logo"
-                    style={{ maxWidth: "120px", maxHeight: "120px",marginTop:"10px" }} 
+                    style={{
+                      maxWidth: "120px",
+                      maxHeight: "120px",
+                      marginTop: "10px",
+                    }}
                   />
                 </Typography>
               </Box>
             </Box>
           )}
 
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Box paddingLeft={isCollapsed ? undefined : "0%"}>
             <Item
               title="Dashboard"
               to="/"
